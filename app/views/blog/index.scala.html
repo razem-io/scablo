@@ -1,0 +1,25 @@
+@(entries: Seq[models.BlogEntry])
+
+
+@main("Blog") {
+    @common.navbar()
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Welcome to the Blog!</h1>
+            <h2 class="subtitle">
+                Feel like it is your <strong>source</strong>.
+            </h2>
+            @for(entry <- entries) {
+            <ul>
+                <li><a href="@entry.url">@entry.name</a></li>
+            </ul>
+            <div class="columns">
+                <div class="column is-three-quarters">@entry.short</div>
+                <div class="column">@entry.prettyTags</div>
+                <div class="column">@entry.prettyDate</div>
+            </div>
+            }
+        </div>
+    </section>
+
+}

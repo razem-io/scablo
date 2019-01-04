@@ -1,0 +1,12 @@
+@(entry: BlogEntry)
+
+@main(entry.name) {
+    @common.navbar()
+    <section class="section">
+        <div class="container">
+            <div class="content">
+                @Html(entry.html)
+            </div>
+        </div>
+    </section>
+}

@@ -1,0 +1,72 @@
+<nav class="navbar">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/blog">
+            <h1>razem-io</h1>
+        </a>
+        <div class="navbar-burger" data-target="navMenubd-example">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <dic id="navMenubd-example" class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item" href="/">
+                Home
+            </a>
+        </div>
+        <div class="navbar-end">
+            <a class="navbar-item" href="https://github.com/razem-io" target="_blank">
+                <span class="icon">
+                    <i class="fa fa-github"></i>
+                </span>
+                <span class="is-hidden-desktop">Github</span>
+            </a>
+            <a class="navbar-item" href="http://stackoverflow.com/users/1029251/julian-liebl?tab=profile" target="_blank">
+                <span class="icon">
+                    <i class="fa fa-stack-overflow fa-lg"></i>
+                </span>
+                <span class="is-hidden-desktop">Stackoverflow</span>
+            </a>
+            <a class="navbar-item" href="http://de.linkedin.com/in/julianliebl" target="_blank">
+                <span class="icon">
+                    <i class="fa fa-linkedin fa-lg"></i>
+                </span>
+                <span class="is-hidden-desktop">Linkedin</span>
+            </a>
+            <a class="navbar-item" href="https://www.xing.com/profile/Julian_Liebl" target="_blank">
+                <span class="icon">
+                    <i class="fa fa-xing fa-lg"></i>
+                </span>
+                <span class="is-hidden-desktop">Xing</span>
+            </a>
+        </div>
+    </dic>
+</nav>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+
+  // Get all "navbar-burger" elements
+  var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Check if there are any nav burgers
+  if ($navbarBurgers.length > 0) {
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(function ($el) {
+      $el.addEventListener('click', function () {
+
+        // Get the target from the "data-target" attribute
+        var target = $el.dataset.target;
+        var $target = document.getElementById(target);
+
+        // Toggle the class on both the "navbar-burger" and the "navbar-menu"
+        $el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+
+      });
+    });
+  }
+
+});
+</script>

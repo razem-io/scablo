@@ -1,0 +1,4 @@
+= 'scablo' -> blogging based on play framework, scala and scala.js
+
+
+

@@ -1,0 +1,18 @@
+workspace:
+  base: /scablo
+  path: src/github.com/razem-io/scablo
+
+pipeline:
+  build:
+    image: hseeberger/scala-sbt:11.0.1_2.12.8_1.2.7
+    commands:
+    - sbt dist
+  github_release:
+    image: plugins/github-release
+    secrets: [ github_release_api_key ]
+    files:
+    - target/universal/scablo.sbt
+    checksum:
+    - sha512
+    when:
+      event: tag
