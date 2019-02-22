@@ -30,11 +30,4 @@ class BlogController @Inject()(cc: ControllerComponents, blogService: BlogServic
       .getOrElse(NotFound)
   }
 
-  def stackHack() = Action { implicit request: Request[AnyContent] =>
-    blogService
-      .findBlogEntry("160531_TryCatchLambda")
-      .map { e =>Ok(views.html.blog.entry(e))}
-      .getOrElse(NotFound)
-  }
-
 }
