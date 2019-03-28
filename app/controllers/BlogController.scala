@@ -13,13 +13,16 @@ import scala.concurrent.ExecutionContext.Implicits.global
 class BlogController @Inject()(cc: ControllerComponents, blogService: BlogService) extends AbstractController(cc) {
 
   def index() = Action { implicit request: Request[AnyContent] =>
-    Ok(views.html.blog.index(blogService.entries.sortBy(_.date.getMillis).reverse))
+    Ok(views.html.blog.index(
+      blogService.blogConfig,
+      blogService.entries.sortBy(_.date.getMillis).reverse
+    ))
   }
 
   def post(year: String, month: String, day: String, name: String) = Action { implicit request: Request[AnyContent] =>
     blogService
       .findBlogEntry(s"$year$month${day}_$name")
-      .map { e =>Ok(views.html.blog.entry(e))}
+      .map { e =>Ok(views.html.blog.entry(e, blogService.blogConfig))}
       .getOrElse(NotFound)
   }
 

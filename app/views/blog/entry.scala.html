@@ -1,7 +1,8 @@
-@(entry: BlogEntry)
+@import services.BlogConfig
+@(entry: BlogEntry, blogConfig: BlogConfig)
 
-@main(entry.name) {
-    @common.navbar()
+@main(blogConfig.title) {
+    @common.navbar(blogConfig)
     <section class="section">
         <div class="container">
             <div class="content">

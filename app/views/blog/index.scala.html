@@ -1,13 +1,14 @@
-@(entries: Seq[models.BlogEntry])
+@import services.BlogConfig
+@(blogConfig: BlogConfig, entries: Seq[models.BlogEntry])
 
 
 @main("Blog") {
-    @common.navbar()
+    @common.navbar(blogConfig)
     <section class="section">
         <div class="container">
-            <h1 class="title">Welcome to the Blog!</h1>
+            <h1 class="title">@blogConfig.title</h1>
             <h2 class="subtitle">
-                Feel like it is your <strong>source</strong>.
+                @blogConfig.subtitle
             </h2>
             @for(entry <- entries) {
             <ul>

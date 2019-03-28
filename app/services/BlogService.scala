@@ -14,9 +14,16 @@ import scala.collection.mutable
 import scala.util.{Failure, Success, Try}
 import scala.util.matching.Regex
 
+case class BlogConfig(title: String, subtitle: String)
+
 @Singleton
 class BlogService @Inject()(config: Configuration) {
   import BlogService._
+
+  val blogConfig = BlogConfig(
+    title = config.get[String]("blog.title"),
+    subtitle = config.get[String]("blog.subtitle")
+  )
 
   val filePath: String = config.get[String]("blog.path")
 
@@ -71,7 +78,7 @@ object BlogService {
     parseMarkdown(IoUtils.readFile(file))
   }
 
-  def fileToBlogEntry(file: Path)(implicit blogService: BlogService): Option[BlogEntry] = {
+  def  fileToBlogEntry(file: Path)(implicit blogService: BlogService): Option[BlogEntry] = {
     pathToFile(file)
       .flatMap(filenameToDate)
       .map(date => {

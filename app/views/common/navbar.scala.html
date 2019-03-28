@@ -1,7 +1,10 @@
+@import services.BlogConfig
+@(blogConfig: BlogConfig)
+
 <nav class="navbar">
     <div class="navbar-brand">
-        <a class="navbar-item" href="/blog">
-            <h1>razem-io</h1>
+        <a class="navbar-item" href="/">
+            <h1>@blogConfig.title</h1>
         </a>
         <div class="navbar-burger" data-target="navMenubd-example">
             <span></span>
@@ -13,32 +16,6 @@
         <div class="navbar-start">
             <a class="navbar-item" href="/">
                 Home
-            </a>
-        </div>
-        <div class="navbar-end">
-            <a class="navbar-item" href="https://github.com/razem-io" target="_blank">
-                <span class="icon">
-                    <i class="fa fa-github"></i>
-                </span>
-                <span class="is-hidden-desktop">Github</span>
-            </a>
-            <a class="navbar-item" href="http://stackoverflow.com/users/1029251/julian-liebl?tab=profile" target="_blank">
-                <span class="icon">
-                    <i class="fa fa-stack-overflow fa-lg"></i>
-                </span>
-                <span class="is-hidden-desktop">Stackoverflow</span>
-            </a>
-            <a class="navbar-item" href="http://de.linkedin.com/in/julianliebl" target="_blank">
-                <span class="icon">
-                    <i class="fa fa-linkedin fa-lg"></i>
-                </span>
-                <span class="is-hidden-desktop">Linkedin</span>
-            </a>
-            <a class="navbar-item" href="https://www.xing.com/profile/Julian_Liebl" target="_blank">
-                <span class="icon">
-                    <i class="fa fa-xing fa-lg"></i>
-                </span>
-                <span class="is-hidden-desktop">Xing</span>
             </a>
         </div>
     </dic>

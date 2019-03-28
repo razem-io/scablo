@@ -9,12 +9,11 @@ lazy val root = (project in file("."))
     // DIST
     packageName in Universal := "scablo",
     // DOCKER
-    packageName in Docker := "razemio",
+    packageName in Docker := "scablo",
     version in Docker := version.value,
-    dockerUsername in Docker := Some("privat"),
-    dockerRepository in Docker := Some("docker.unser.computer:5000")
+    dockerUsername in Docker := Some("razemio")
   )
-  .enablePlugins(PlayScala,JavaAppPackaging, DockerPlugin)
+  .enablePlugins(PlayScala, JavaAppPackaging, DockerPlugin)
 
 scalaVersion := "2.12.8"
 
