@@ -4,6 +4,7 @@ import better.files.File
 import com.sksamuel.scrimage.Image
 import com.sksamuel.scrimage.nio.JpegWriter
 import models.BlogEntry
+import org.zeroturnaround.zip.ZipUtil
 import play.Logger
 
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -18,6 +19,13 @@ object GalleryPlugin extends Plugin {
     val rawFolder = File(galleryFolder.pathAsString + "/raw")
     val fullFolder = File(galleryFolder.pathAsString + "/full")
     val thumbFolder = File(galleryFolder.pathAsString + "/thumb")
+    val zipFile = File(galleryFolder.pathAsString + s"/${blogEntry.encodedName}.zip")
+
+    for {
+      _ <- if(!fullFolder.exists) convertImages(rawFolder, fullFolder, 3840, 3840) else Future.successful()
+      _ <- if(!thumbFolder.exists) convertImages(rawFolder, thumbFolder, 400, 400) else Future.successful()
+      _ <- if(!zipFile.exists) createZipFromDirectory(fullFolder, zipFile) else Future.successful()
+    } yield ()
 
     if(!fullFolder.exists) convertImages(rawFolder, fullFolder, 3840, 3840)
     if(!thumbFolder.exists) convertImages(rawFolder, thumbFolder, 400, 400)
@@ -32,10 +40,18 @@ object GalleryPlugin extends Plugin {
       }).mkString("""<div class="columns is-multiline is-centered">""", "\n", """</div>""")
     })
 
-    rows.mkString("\n")
+    val downloadThis = s"""<a href="${blogEntry.url.split("/").last}/assets/gallery/$galleryNumber/${zipFile.name}" class="button is-dark">Gallery Download</a>"""
+
+    rows.mkString("\n") + downloadThis
   }
 
-  def convertImages(sourceFolder: File, destFolder: File, maxW: Int, maxH: Int, compression: Int = 80) = {
+  def createZipFromDirectory(sourceFolder: File, zipFile: File): Future[Unit] = Future {
+    Logger.info("Creating zip file from folder " + sourceFolder + ".")
+    ZipUtil.pack(sourceFolder.toJava, zipFile.toJava)
+    Logger.info("Creating zip file from folder " + sourceFolder + " finished.")
+  }
+
+  def convertImages(sourceFolder: File, destFolder: File, maxW: Int, maxH: Int, compression: Int = 80): Future[Unit] = {
     Future {
       destFolder.createDirectoryIfNotExists()
 

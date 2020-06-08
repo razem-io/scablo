@@ -15,10 +15,10 @@ lazy val root = (project in file("."))
   )
   .enablePlugins(PlayScala, JavaAppPackaging, DockerPlugin)
 
-scalaVersion := "2.12.8"
+scalaVersion := "2.12.11"
 
 libraryDependencies ++= Seq(
-  "org.webjars.npm" % "bulma" % "0.6.2",
+  "org.webjars.npm" % "bulma" % "0.8.2",
   "org.webjars" % "font-awesome" % "4.7.0",
   "org.webjars" % "chartjs" % "2.7.2",
   "org.webjars.bower" % "highlightjs" % "9.12.0",
@@ -32,6 +32,7 @@ libraryDependencies ++= Seq(
   "com.github.nscala-time" %% "nscala-time" % "2.16.0",
   "com.sksamuel.scrimage" %% "scrimage-core" % "2.1.8",
   "com.github.pathikrit" %% "better-files" % "3.6.0",
+  "org.zeroturnaround" % "zt-zip" % "1.13",
   guice
 )
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.0" % Test

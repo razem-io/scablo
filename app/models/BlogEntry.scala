@@ -12,6 +12,8 @@ import services.BlogService
 
     val prettyTags: String = tags.mkString(" ")
     val prettyDate: String = s"${date.getYear}/${date.getMonthOfYear}/${date.getDayOfMonth}"
+
+    def encodedName: String = BlogEntry.encodeName(name)
   }
 
 object BlogEntry {

@@ -2,7 +2,7 @@ package utilities
 
 import models.BlogEntry
 import play.api.Logger
-import plugins.GalleryPlugin
+import plugins.{GalleryPlugin, GoogleDriveVideoPlugin}
 
 import scala.util.matching.Regex
 
@@ -50,6 +50,7 @@ object BlogUtils {
 
       moduleName match {
         case "gallery" => GalleryPlugin(blogEntry, moduleArgs)
+        case "googledrivevideo" => GoogleDriveVideoPlugin(blogEntry, moduleArgs)
         case name => Logger.error(s"Unknown module: $name")
           ""
       }
