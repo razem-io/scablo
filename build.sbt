@@ -9,16 +9,17 @@ lazy val root = (project in file("."))
     // DIST
     packageName in Universal := "scablo",
     // DOCKER
+    dockerBaseImage := "adoptopenjdk/openjdk11:x86_64-alpine-jre-11.0.6_10",
     packageName in Docker := "scablo",
     version in Docker := version.value,
     dockerUsername in Docker := Some("razemio")
   )
-  .enablePlugins(PlayScala, JavaAppPackaging, DockerPlugin)
+  .enablePlugins(PlayScala, JavaAppPackaging, DockerPlugin, AshScriptPlugin)
 
 scalaVersion := "2.12.11"
 
 libraryDependencies ++= Seq(
-  "org.webjars.npm" % "bulma" % "0.8.2",
+  "org.webjars.npm" % "bulma" % "0.9.1",
   "org.webjars" % "font-awesome" % "4.7.0",
   "org.webjars" % "chartjs" % "2.7.2",
   "org.webjars.bower" % "highlightjs" % "9.12.0",
@@ -35,6 +36,7 @@ libraryDependencies ++= Seq(
   "org.zeroturnaround" % "zt-zip" % "1.13",
   guice
 )
+
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.0" % Test
 
 // Adds additional packages into Twirl
