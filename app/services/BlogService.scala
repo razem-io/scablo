@@ -20,7 +20,7 @@ case class BlogConfig(title: String, subtitle: String)
 class BlogService @Inject()(config: Configuration) {
   import BlogService._
 
-  val blogConfig = BlogConfig(
+  val blogConfig: BlogConfig = BlogConfig(
     title = config.get[String]("blog.title"),
     subtitle = config.get[String]("blog.subtitle")
   )
