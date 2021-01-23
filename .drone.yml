@@ -4,7 +4,7 @@ workspace:
 
 pipeline:
   build:
-    image: hseeberger/scala-sbt:11.0.1_2.12.8_1.2.7
+    image: hseeberger/scala-sbt:11.0.9.1_1.4.6_2.11.12
     commands:
     - sbt dist
   github_release:
