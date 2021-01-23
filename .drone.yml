@@ -11,7 +11,7 @@ pipeline:
     image: plugins/github-release
     secrets: [ github_release_api_key ]
     files:
-    - target/universal/scablo.sbt
+    - target/universal/scablo.zip
     checksum:
     - sha512
     when:
