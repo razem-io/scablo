@@ -2,7 +2,7 @@ package utilities
 
 import models.BlogEntry
 import play.api.Logger
-import plugins.{GalleryPlugin, GoogleDriveVideoPlugin}
+import plugins.{GalleryPlugin, GoogleDriveVideoPlugin, PicturePlugin, YoutubeVideoPlugin}
 
 import scala.util.matching.Regex
 
@@ -49,8 +49,10 @@ object BlogUtils {
       val moduleArgs = r.group(2).split(",")
 
       moduleName match {
+        case "picture" => PicturePlugin(blogEntry, moduleArgs)
         case "gallery" => GalleryPlugin(blogEntry, moduleArgs)
         case "googledrivevideo" => GoogleDriveVideoPlugin(blogEntry, moduleArgs)
+        case "youtubevideo" => YoutubeVideoPlugin(blogEntry, moduleArgs)
         case name => Logger.error(s"Unknown module: $name")
           ""
       }
