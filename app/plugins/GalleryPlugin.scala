@@ -27,9 +27,6 @@ object GalleryPlugin extends Plugin {
       _ <- if(!zipFile.exists) createZipFromDirectory(fullFolder, zipFile) else Future.successful()
     } yield ()
 
-    if(!fullFolder.exists) convertImages(rawFolder, fullFolder, 3840, 3840)
-    if(!thumbFolder.exists) convertImages(rawFolder, thumbFolder, 400, 400)
-
     val rows = thumbFolder.children.toSeq.map(_.name).sorted.grouped(10000).map(row => {
       row.map(image => {
         """<div class="column is-narrow">""" +
@@ -63,6 +60,7 @@ object GalleryPlugin extends Plugin {
       Logger.info(s"Starting converting $imageCount images in $sourceFolder to max ${maxW}x$maxH.")
 
       imageFiles.sortBy(_.pathAsString).map(_.path).zipWithIndex.foreach { case (path, index) =>
+        Logger.info("Converting " + path)
         Image
           .fromPath(path)
           .bound(maxH, maxH)
