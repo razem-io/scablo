@@ -8,7 +8,7 @@ import utilities.{BlogUtils, IoUtils, MarkdownUtils}
 
 import java.nio.file.{Files, Path, Paths}
 import javax.inject.{Inject, Singleton}
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import scala.collection.mutable
 import scala.util.matching.Regex
 import scala.util.{Failure, Success, Try}

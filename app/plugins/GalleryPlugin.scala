@@ -1,7 +1,7 @@
 package plugins
 
 import better.files.File
-import com.sksamuel.scrimage.Image
+import com.sksamuel.scrimage.ImmutableImage
 import com.sksamuel.scrimage.nio.JpegWriter
 import models.BlogEntry
 import org.zeroturnaround.zip.ZipUtil
@@ -61,10 +61,11 @@ object GalleryPlugin extends Plugin with Logging {
 
       imageFiles.sortBy(_.pathAsString).map(_.path).zipWithIndex.foreach { case (path, index) =>
         logger.info("Converting " + path)
-        Image
+        ImmutableImage
+          .loader()
           .fromPath(path)
           .bound(maxH, maxH)
-          .output(fullDirectoryPathAsString + s"/${formatIndexName(index, leadingZeros)}.jpg")(JpegWriter().withCompression(compression))
+          .output(JpegWriter.compression(compression), fullDirectoryPathAsString + s"/${formatIndexName(index, leadingZeros)}.jpg")
       }
 
       logger.info(s"Done converting $imageCount images in $sourceFolder to max ${maxW}x$maxH.")
