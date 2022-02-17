@@ -1,18 +1,17 @@
 package services
 
-import java.nio.file.{Files, Path, Paths}
-import javax.inject.{Inject, Singleton}
-
 import models.BlogEntry
 import org.joda.time.DateTime
 import org.joda.time.format.{DateTimeFormat, DateTimeFormatter}
-import play.api.{Configuration, Logger}
+import play.api.{Configuration, Logging}
 import utilities.{BlogUtils, IoUtils, MarkdownUtils}
 
+import java.nio.file.{Files, Path, Paths}
+import javax.inject.{Inject, Singleton}
 import scala.collection.JavaConverters._
 import scala.collection.mutable
-import scala.util.{Failure, Success, Try}
 import scala.util.matching.Regex
+import scala.util.{Failure, Success, Try}
 
 case class BlogConfig(title: String, subtitle: String)
 
@@ -38,8 +37,7 @@ class BlogService @Inject()(config: Configuration) {
     .find(_.fileName == s"$name.md")
 }
 
-object BlogService {
-  val logger: Logger = Logger(this.getClass)
+object BlogService extends Logging {
   val fileNameRegex: Regex = """([0-9]\d{1})((0[1-9]|1[0-2]))((0|1|2|3)\d{1})_\S*(\.md)""".r
   val dateFormat: DateTimeFormatter = DateTimeFormat.forPattern("yyMMdd")
 

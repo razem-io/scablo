@@ -5,12 +5,12 @@ import com.sksamuel.scrimage.Image
 import com.sksamuel.scrimage.nio.JpegWriter
 import models.BlogEntry
 import org.zeroturnaround.zip.ZipUtil
-import play.Logger
+import play.api.Logging
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
-object GalleryPlugin extends Plugin {
+object GalleryPlugin extends Plugin with Logging {
   override val name: String = "gallery"
 
   def apply(blogEntry: BlogEntry, args: Array[String]): String = {
@@ -43,9 +43,9 @@ object GalleryPlugin extends Plugin {
   }
 
   def createZipFromDirectory(sourceFolder: File, zipFile: File): Future[Unit] = Future {
-    Logger.info("Creating zip file from folder " + sourceFolder + ".")
+    logger.info("Creating zip file from folder " + sourceFolder + ".")
     ZipUtil.pack(sourceFolder.toJava, zipFile.toJava)
-    Logger.info("Creating zip file from folder " + sourceFolder + " finished.")
+    logger.info("Creating zip file from folder " + sourceFolder + " finished.")
   }
 
   def convertImages(sourceFolder: File, destFolder: File, maxW: Int, maxH: Int, compression: Int = 80): Future[Unit] = {
@@ -57,17 +57,17 @@ object GalleryPlugin extends Plugin {
       val imageCount = imageFiles.size
       val leadingZeros = imageCount.toString.length
 
-      Logger.info(s"Starting converting $imageCount images in $sourceFolder to max ${maxW}x$maxH.")
+      logger.info(s"Starting converting $imageCount images in $sourceFolder to max ${maxW}x$maxH.")
 
       imageFiles.sortBy(_.pathAsString).map(_.path).zipWithIndex.foreach { case (path, index) =>
-        Logger.info("Converting " + path)
+        logger.info("Converting " + path)
         Image
           .fromPath(path)
           .bound(maxH, maxH)
           .output(fullDirectoryPathAsString + s"/${formatIndexName(index, leadingZeros)}.jpg")(JpegWriter().withCompression(compression))
       }
 
-      Logger.info(s"Done converting $imageCount images in $sourceFolder to max ${maxW}x$maxH.")
+      logger.info(s"Done converting $imageCount images in $sourceFolder to max ${maxW}x$maxH.")
     }
   }
 
