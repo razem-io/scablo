@@ -22,9 +22,9 @@ object GalleryPlugin extends Plugin {
     val zipFile = File(galleryFolder.pathAsString + s"/${blogEntry.encodedName}.zip")
 
     for {
-      _ <- if(!fullFolder.exists) convertImages(rawFolder, fullFolder, 3840, 3840) else Future.successful()
-      _ <- if(!thumbFolder.exists) convertImages(rawFolder, thumbFolder, 400, 400) else Future.successful()
-      _ <- if(!zipFile.exists) createZipFromDirectory(fullFolder, zipFile) else Future.successful()
+      _ <- if(!fullFolder.exists) convertImages(rawFolder, fullFolder, 3840, 3840) else Future.unit
+      _ <- if(!thumbFolder.exists) convertImages(rawFolder, thumbFolder, 400, 400) else Future.unit
+      _ <- if(!zipFile.exists) createZipFromDirectory(fullFolder, zipFile) else Future.unit
     } yield ()
 
     val rows = thumbFolder.children.toSeq.map(_.name).sorted.grouped(10000).map(row => {

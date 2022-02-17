@@ -7,12 +7,12 @@ version := "0.0.2"
 lazy val root = (project in file("."))
   .settings(
     // DIST
-    packageName in Universal := "scablo",
+    Universal / packageName  := "scablo",
     // DOCKER
     dockerBaseImage := "adoptopenjdk/openjdk11:x86_64-alpine-jre-11.0.6_10",
-    packageName in Docker := "scablo",
-    version in Docker := version.value,
-    dockerUsername in Docker := Some("razemio")
+    Docker / packageName  := "scablo",
+    Docker / version := version.value,
+    Docker / dockerUsername := Some("razemio")
   )
   .enablePlugins(PlayScala, JavaAppPackaging, DockerPlugin, AshScriptPlugin)
 
