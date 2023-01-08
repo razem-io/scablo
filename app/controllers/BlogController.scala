@@ -15,7 +15,7 @@ class BlogController @Inject()(cc: ControllerComponents, blogService: BlogServic
   def index() = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.blog.index(
       blogService.blogConfig,
-      blogService.entries.sortBy(_.date.getMillis).reverse
+      blogService.entries.sortBy(_.date.getMillis).reverse.toVector
     ))
   }
 

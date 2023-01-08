@@ -4,9 +4,9 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                                           controllers.HomeController.index
+GET     /                                           controllers.HomeController.index()
 
-GET     /blog                                       controllers.BlogController.index
+GET     /blog                                       controllers.BlogController.index()
 GET     /blog/:year/:month/:day/:name               controllers.BlogController.post(year: String, month: String, day: String, name: String)
 GET     /blog/:year/:month/:day/:name/assets/*file  controllers.BlogController.postAsset(year: String, month: String, day: String, name: String, file: String)
 

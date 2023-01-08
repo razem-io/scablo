@@ -1,12 +1,12 @@
 package utilities
 
 import models.BlogEntry
-import play.api.Logger
-import plugins.{GalleryPlugin, GoogleDriveVideoPlugin, PanoPlugin, PicturePlugin, YoutubeVideoPlugin}
+import play.api.Logging
+import plugins._
 
 import scala.util.matching.Regex
 
-object BlogUtils {
+object BlogUtils extends Logging {
   val nameRegex: Regex =  """(\[NAME\])(.*)(\[\/NAME\])""".r
   val shortRegex: Regex =  """(\[SHORT\])(.*)(\[\/SHORT\])""".r
   val tagsRegex: Regex =  """(\[TAGS\])(.*)(\[\/TAGS\])""".r
@@ -54,7 +54,7 @@ object BlogUtils {
         case "gallery" => GalleryPlugin(blogEntry, moduleArgs)
         case "googledrivevideo" => GoogleDriveVideoPlugin(blogEntry, moduleArgs)
         case "youtubevideo" => YoutubeVideoPlugin(blogEntry, moduleArgs)
-        case name => Logger.error(s"Unknown module: $name")
+        case name => logger.error(s"Unknown module: $name")
           ""
       }
     })

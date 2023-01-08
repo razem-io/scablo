@@ -4,11 +4,12 @@ import com.vladsch.flexmark.Extension
 import com.vladsch.flexmark.ast.Document
 import com.vladsch.flexmark.ext.gfm.tasklist.TaskListExtension
 import com.vladsch.flexmark.ext.tables.TablesExtension
+import com.vladsch.flexmark.ext.toc.TocExtension
 import com.vladsch.flexmark.html.HtmlRenderer
 import com.vladsch.flexmark.parser.Parser
 import com.vladsch.flexmark.util.options.MutableDataSet
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 
 
 object MarkdownUtils {
@@ -16,7 +17,7 @@ object MarkdownUtils {
 
   val options = new MutableDataSet()
 
-  val extensions: List[Extension] = List(TablesExtension.create, TaskListExtension.create)
+  val extensions: List[Extension] = List(TablesExtension.create, TaskListExtension.create, TocExtension.create)
 
   options.set(Parser.EXTENSIONS, extensions.asJava)
 
