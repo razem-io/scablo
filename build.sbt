@@ -16,7 +16,7 @@ lazy val root = (project in file("."))
   )
   .enablePlugins(PlayScala, JavaAppPackaging, DockerPlugin, AshScriptPlugin)
 
-scalaVersion := "2.12.11"
+scalaVersion := "2.12.14"
 
 libraryDependencies ++= Seq(
   "org.webjars.npm" % "bulma" % "0.9.1",

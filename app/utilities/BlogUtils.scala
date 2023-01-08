@@ -2,7 +2,7 @@ package utilities
 
 import models.BlogEntry
 import play.api.Logger
-import plugins.{GalleryPlugin, GoogleDriveVideoPlugin, PicturePlugin, YoutubeVideoPlugin}
+import plugins.{GalleryPlugin, GoogleDriveVideoPlugin, PanoPlugin, PicturePlugin, YoutubeVideoPlugin}
 
 import scala.util.matching.Regex
 
@@ -50,6 +50,7 @@ object BlogUtils {
 
       moduleName match {
         case "picture" => PicturePlugin(blogEntry, moduleArgs)
+        case "pano" => PanoPlugin(blogEntry, moduleArgs)
         case "gallery" => GalleryPlugin(blogEntry, moduleArgs)
         case "googledrivevideo" => GoogleDriveVideoPlugin(blogEntry, moduleArgs)
         case "youtubevideo" => YoutubeVideoPlugin(blogEntry, moduleArgs)
